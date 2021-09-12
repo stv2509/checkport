@@ -5,6 +5,7 @@ import (
 	"net"
 	"sync"
 	"time"
+	"os"
 )
 
 func RawConnect(wg *sync.WaitGroup, host, proto string, ports []string, sec int) {
@@ -15,7 +16,8 @@ func RawConnect(wg *sync.WaitGroup, host, proto string, ports []string, sec int)
 			timeout := time.Duration(sec) * time.Second
 			conn, err := net.DialTimeout(proto, net.JoinHostPort(host, port), timeout)
 			if err != nil {
-				fmt.Println(time.Now().Format("02.01.2006 15:04:05"), "Connecting error:", net.JoinHostPort(host, port), err.Error())
+				node_name := os.Getenv("NODE_NAME")
+				fmt.Println(time.Now().Format("02.01.2006 15:04:05"), node_name, "Connecting error:", net.JoinHostPort(host, port), err.Error())
 			}
 			if conn != nil {
 				defer conn.Close()
