@@ -1,4 +1,5 @@
 # checkport checkport-daemonset.yml
+```
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -67,3 +68,4 @@ spec:
       - key: node-role.kubernetes.io/master
         operator: Exists
         effect: NoSchedule
+```
